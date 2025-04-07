@@ -6,7 +6,7 @@ on: push
 env:
   GODOT_VERSION: 4.3
   EXPORT_NAME: RDFTinker
-  PROJECT_PATH: RDFTinker
+  PROJECT_PATH: .
 
 jobs:
   export-windows:
