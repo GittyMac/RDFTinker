@@ -1,0 +1,46 @@
+[gd_scene load_steps=2 format=3 uid="uid://bfmd8nhj2lmxt"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_xxro1"]
+
+[node name="Main" type="GridContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xxro1")
+
+[node name="FileDialog" type="FileDialog" parent="."]
+title = "Open a Directory"
+ok_button_text = "Select Current Folder"
+file_mode = 2
+access = 2
+
+[node name="ItemList" type="ItemList" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+icon_mode = 0
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 2
+
+[node name="ChangeDir" type="Button" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 6
+text = "Change Game Directory"
+
+[node name="About" type="Button" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 6
+text = "About"
+
+[connection signal="canceled" from="FileDialog" to="." method="_on_file_dialog_canceled"]
+[connection signal="dir_selected" from="FileDialog" to="." method="_on_dir_selected"]
+[connection signal="item_clicked" from="ItemList" to="." method="_on_item_list_item_clicked"]
+[connection signal="pressed" from="GridContainer/ChangeDir" to="." method="_on_change_dir_pressed"]
+[connection signal="pressed" from="GridContainer/About" to="." method="_on_about_pressed"]

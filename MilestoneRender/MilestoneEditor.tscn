@@ -1,0 +1,199 @@
+[gd_scene load_steps=3 format=3 uid="uid://bb8gd7on1v7co"]
+
+[ext_resource type="Script" path="res://MilestoneRender/milestone_editor.gd" id="1_rm06u"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_8lcwi"]
+size = Vector2(600, 400)
+
+[node name="MilestoneEditor" type="GridContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 3
+script = ExtResource("1_rm06u")
+
+[node name="MSSide" type="GridContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Close" type="Button" parent="MSSide"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Close"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MSSide"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MSList" type="ItemList" parent="MSSide/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+auto_height = true
+fixed_column_width = 343
+icon_mode = 0
+fixed_icon_size = Vector2i(300, 200)
+
+[node name="GridContainer" type="GridContainer" parent="MSSide"]
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 2
+
+[node name="AddMS" type="Button" parent="MSSide/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Add MS"
+
+[node name="RemMS" type="Button" parent="MSSide/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Delete MS"
+
+[node name="SaveMS" type="Button" parent="MSSide"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Save File"
+
+[node name="MSInfo" type="GridContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MSLabel" type="Label" parent="MSInfo"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Milestone"
+
+[node name="MSNameText" type="TextEdit" parent="MSInfo"]
+custom_minimum_size = Vector2(400, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Name"
+
+[node name="MSZoneText" type="TextEdit" parent="MSInfo"]
+custom_minimum_size = Vector2(400, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Zone"
+
+[node name="MSOrdIDText" type="TextEdit" parent="MSInfo"]
+custom_minimum_size = Vector2(400, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "ID"
+
+[node name="PrvMS" type="Button" parent="MSInfo"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Preview Milestone"
+
+[node name="SaveMS" type="Button" parent="MSInfo"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Apply Milestone Settings"
+
+[node name="SlideLabel" type="Label" parent="MSInfo"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Slides"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MSInfo"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SlideList" type="ItemList" parent="MSInfo/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+auto_height = true
+icon_mode = 0
+
+[node name="SlideControls" type="GridContainer" parent="MSInfo"]
+layout_mode = 2
+size_flags_horizontal = 6
+columns = 4
+
+[node name="SlideUp" type="Button" parent="MSInfo/SlideControls"]
+layout_mode = 2
+text = "Move Up"
+
+[node name="SlideDown" type="Button" parent="MSInfo/SlideControls"]
+layout_mode = 2
+text = "Move Down"
+
+[node name="SlideAdd" type="Button" parent="MSInfo/SlideControls"]
+layout_mode = 2
+text = "Add Slide"
+
+[node name="SlideRem" type="Button" parent="MSInfo/SlideControls"]
+layout_mode = 2
+text = "Delete Slide"
+
+[node name="Slide_Side" type="GridContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SlideLabel" type="Label" parent="Slide_Side"]
+layout_mode = 2
+text = "Slide"
+
+[node name="ImagePreview" type="TextureRect" parent="Slide_Side"]
+custom_minimum_size = Vector2(300, 200)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = SubResource("PlaceholderTexture2D_8lcwi")
+expand_mode = 5
+stretch_mode = 4
+
+[node name="SlideImg" type="TextEdit" parent="Slide_Side"]
+custom_minimum_size = Vector2(400, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Image File (Relative to misc)"
+
+[node name="SlideVoice" type="OptionButton" parent="Slide_Side"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SlideLength" type="TextEdit" parent="Slide_Side"]
+custom_minimum_size = Vector2(400, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Slide Length (In Seconds)"
+
+[node name="SlideText" type="TextEdit" parent="Slide_Side"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+placeholder_text = "Slide Text"
+wrap_mode = 1
+
+[node name="SaveSlide" type="Button" parent="Slide_Side"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Apply Slide Changes"
+
+[node name="MSAudio" type="AudioStreamPlayer" parent="."]
+
+[connection signal="pressed" from="MSSide/Close" to="." method="_on_close_pressed"]
+[connection signal="item_clicked" from="MSSide/ScrollContainer/MSList" to="." method="_on_item_list_item_clicked"]
+[connection signal="pressed" from="MSSide/GridContainer/AddMS" to="." method="_ms_add"]
+[connection signal="pressed" from="MSSide/GridContainer/RemMS" to="." method="_ms_remove"]
+[connection signal="pressed" from="MSSide/SaveMS" to="." method="_save_ms"]
+[connection signal="pressed" from="MSInfo/PrvMS" to="." method="_preview_ms"]
+[connection signal="pressed" from="MSInfo/SaveMS" to="." method="_apply_ms_settings"]
+[connection signal="item_clicked" from="MSInfo/ScrollContainer/SlideList" to="." method="_on_item_list_slide_clicked"]
+[connection signal="pressed" from="MSInfo/SlideControls/SlideUp" to="." method="_move_up"]
+[connection signal="pressed" from="MSInfo/SlideControls/SlideDown" to="." method="_move_down"]
+[connection signal="button_down" from="MSInfo/SlideControls/SlideAdd" to="." method="_add_slide"]
+[connection signal="pressed" from="MSInfo/SlideControls/SlideRem" to="." method="_delete_slide"]
+[connection signal="pressed" from="Slide_Side/SaveSlide" to="." method="_apply_changes"]

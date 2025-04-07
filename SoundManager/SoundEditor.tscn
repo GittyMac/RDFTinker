@@ -1,0 +1,109 @@
+[gd_scene load_steps=2 format=3 uid="uid://bic5m00riaq18"]
+
+[ext_resource type="Script" path="res://SoundManager/sound_editor.gd" id="1_rn8su"]
+
+[node name="SoundEditor" type="GridContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 2
+script = ExtResource("1_rn8su")
+
+[node name="SoundList" type="GridContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Close" type="Button" parent="SoundList"]
+layout_mode = 2
+text = "Close"
+
+[node name="Tabs" type="GridContainer" parent="SoundList"]
+layout_mode = 2
+columns = 2
+
+[node name="Sounds" type="Button" parent="SoundList/Tabs"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "View Sounds"
+
+[node name="Music" type="Button" parent="SoundList/Tabs"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "View Music"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="SoundList"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+follow_focus = true
+
+[node name="Sounds" type="ItemList" parent="SoundList/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SoundEdits" type="GridContainer" parent="SoundList"]
+layout_mode = 2
+columns = 2
+
+[node name="Add" type="Button" parent="SoundList/SoundEdits"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Add"
+
+[node name="Remove" type="Button" parent="SoundList/SoundEdits"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Remove"
+
+[node name="SaveFile" type="Button" parent="SoundList"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Save File"
+
+[node name="SoundInfo" type="GridContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+
+[node name="Play" type="Button" parent="SoundInfo"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Play"
+
+[node name="Stop" type="Button" parent="SoundInfo"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Stop
+"
+
+[node name="ID" type="TextEdit" parent="SoundInfo"]
+custom_minimum_size = Vector2(400, 50)
+layout_mode = 2
+placeholder_text = "Sound ID"
+
+[node name="File" type="TextEdit" parent="SoundInfo"]
+custom_minimum_size = Vector2(400, 50)
+layout_mode = 2
+placeholder_text = "Sound File"
+
+[node name="Save" type="Button" parent="SoundInfo"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Save Sound"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[connection signal="pressed" from="SoundList/Close" to="." method="_on_close_pressed"]
+[connection signal="pressed" from="SoundList/Tabs/Sounds" to="." method="_on_sounds_pressed"]
+[connection signal="pressed" from="SoundList/Tabs/Music" to="." method="_on_music_pressed"]
+[connection signal="item_clicked" from="SoundList/ScrollContainer/Sounds" to="." method="_on_sounds_item_clicked"]
+[connection signal="pressed" from="SoundList/SoundEdits/Add" to="." method="_add_sound"]
+[connection signal="pressed" from="SoundList/SoundEdits/Remove" to="." method="_remove_sound"]
+[connection signal="pressed" from="SoundList/SaveFile" to="." method="_save_file"]
+[connection signal="pressed" from="SoundInfo/Play" to="." method="_play_sound"]
+[connection signal="pressed" from="SoundInfo/Stop" to="." method="_stop_sound"]
+[connection signal="pressed" from="SoundInfo/Save" to="." method="_save_sound"]
